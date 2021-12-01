@@ -7,6 +7,7 @@ import (
 	"adventofcode/2015"
 	"adventofcode/2018"
 	"adventofcode/2019"
+	"adventofcode/2021"
 )
 
 func main() {
@@ -26,6 +27,8 @@ func main() {
 		f = aoc2018.Run
 	case "2019":
 		f = aoc2019.Run
+	case "2021":
+		f = aoc2021.Run
 	default:
 		log.Fatal(year, " is not a valid year")
 	}
