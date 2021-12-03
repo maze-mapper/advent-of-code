@@ -6,6 +6,7 @@ import (
 
 	"adventofcode/2021/01"
 	"adventofcode/2021/02"
+	"adventofcode/2021/03"
 )
 
 func Run(day, inputFile string) {
@@ -15,6 +16,8 @@ func Run(day, inputFile string) {
 		f = day1.Run
 	case "2":
 		f = day2.Run
+	case "3":
+		f = day3.Run
 	default:
 		log.Fatal(day, " is not a valid day")
 	}
