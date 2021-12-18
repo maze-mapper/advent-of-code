@@ -21,6 +21,7 @@ import (
 	"adventofcode/2021/15"
 	"adventofcode/2021/16"
 	"adventofcode/2021/17"
+	"adventofcode/2021/18"
 )
 
 func Run(day, inputFile string) {
@@ -60,6 +61,8 @@ func Run(day, inputFile string) {
 		f = day16.Run
 	case "17":
 		f = day17.Run
+	case "18":
+		f = day18.Run
 	default:
 		log.Fatal(day, " is not a valid day")
 	}
