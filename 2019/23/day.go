@@ -7,7 +7,7 @@ import (
 	"log"
 	"sync"
 
-	"adventofcode/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
 )
 
 // packet holds the data for a packet sent between computers

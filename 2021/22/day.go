@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"adventofcode/coordinates"
+	"github.com/maze-mapper/advent-of-code/coordinates"
 )
 
 type action struct {

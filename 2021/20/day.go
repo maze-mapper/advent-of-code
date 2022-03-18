@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	"adventofcode/coordinates"
+	"github.com/maze-mapper/advent-of-code/coordinates"
 )
 
 func parseData(data []byte) ([]bool, map[coordinates.Coord]bool) {

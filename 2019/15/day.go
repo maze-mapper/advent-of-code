@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"log"
 
-	"adventofcode/2019/intcode"
-	"adventofcode/coordinates"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/coordinates"
 )
 
 // Directions of movement

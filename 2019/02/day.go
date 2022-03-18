@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"adventofcode/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
 )
 
 func part1(program []int) int {
