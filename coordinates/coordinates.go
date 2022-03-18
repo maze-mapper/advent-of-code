@@ -61,8 +61,8 @@ func Range(coords []Coord) (Coord, Coord) {
 	for _, c := range coords[1:] {
 		// Check for smaller values
 		if c.X < minCoord.X {
-                        minCoord.X = c.X
-                }
+			minCoord.X = c.X
+		}
 		if c.Y < minCoord.Y {
 			minCoord.Y = c.Y
 		}
@@ -75,8 +75,8 @@ func Range(coords []Coord) (Coord, Coord) {
 			maxCoord.X = c.X
 		}
 		if c.Y > maxCoord.Y {
-                        maxCoord.Y = c.Y
-                }
+			maxCoord.Y = c.Y
+		}
 		if c.Z > maxCoord.Z {
 			maxCoord.Z = c.Z
 		}
@@ -84,4 +84,3 @@ func Range(coords []Coord) (Coord, Coord) {
 
 	return minCoord, maxCoord
 }
-
