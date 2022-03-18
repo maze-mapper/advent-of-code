@@ -7,7 +7,7 @@ import (
 	"log"
 	"sync"
 
-	"adventofcode/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
 )
 
 // generatePermutations uses Heap's algorithm to generate all permutations of a slice

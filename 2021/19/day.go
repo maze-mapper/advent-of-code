@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"adventofcode/coordinates"
+	"github.com/maze-mapper/advent-of-code/coordinates"
 )
 
 // parseData returns the reports as a slice of coordinate slices

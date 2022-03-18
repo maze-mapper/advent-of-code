@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	"adventofcode/coordinates"
+	"github.com/maze-mapper/advent-of-code/coordinates"
 )
 
 type fold struct {

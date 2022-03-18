@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"adventofcode/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
 )
 
 // runProgram runs the given ASCII program and returns the output

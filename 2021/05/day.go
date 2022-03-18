@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"adventofcode/coordinates"
+	"github.com/maze-mapper/advent-of-code/coordinates"
 )
 
 // Line holds the two coordinates that define the line

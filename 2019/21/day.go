@@ -2,7 +2,7 @@
 package day21
 
 import (
-	"adventofcode/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
 	"fmt"
 	"io/ioutil"
 	"log"

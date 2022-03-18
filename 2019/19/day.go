@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"adventofcode/2019/intcode"
+	"github.com/maze-mapper/advent-of-code/2019/intcode"
 )
 
 // Constants for whether or not beam is affecting drone

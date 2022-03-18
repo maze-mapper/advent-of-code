@@ -4,10 +4,10 @@ import (
 	"flag"
 	"log"
 
-	"adventofcode/2015"
-	"adventofcode/2018"
-	"adventofcode/2019"
-	"adventofcode/2021"
+	"github.com/maze-mapper/advent-of-code/2015"
+	"github.com/maze-mapper/advent-of-code/2018"
+	"github.com/maze-mapper/advent-of-code/2019"
+	"github.com/maze-mapper/advent-of-code/2021"
 )
 
 func main() {
