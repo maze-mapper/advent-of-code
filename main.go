@@ -8,6 +8,7 @@ import (
 	"github.com/maze-mapper/advent-of-code/2018"
 	"github.com/maze-mapper/advent-of-code/2019"
 	"github.com/maze-mapper/advent-of-code/2021"
+	"github.com/maze-mapper/advent-of-code/2022"
 )
 
 func main() {
@@ -29,6 +30,8 @@ func main() {
 		f = aoc2019.Run
 	case "2021":
 		f = aoc2021.Run
+	case "2022":
+		f = aoc2022.Run
 	default:
 		log.Fatal(year, " is not a valid year")
 	}
