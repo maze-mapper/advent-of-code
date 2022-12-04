@@ -1,4 +1,4 @@
-// Advent of Code 2022
+// Advent of Code 2022.
 package aoc2022
 
 import (
@@ -7,6 +7,7 @@ import (
 	"github.com/maze-mapper/advent-of-code/2022/01"
 	"github.com/maze-mapper/advent-of-code/2022/02"
 	"github.com/maze-mapper/advent-of-code/2022/03"
+	"github.com/maze-mapper/advent-of-code/2022/04"
 )
 
 func Run(day, inputFile string) {
@@ -18,6 +19,8 @@ func Run(day, inputFile string) {
 		f = day2.Run
 	case "3":
 		f = day3.Run
+	case "4":
+		f = day4.Run
 	default:
 		log.Fatal(day, " is not a valid day")
 	}
