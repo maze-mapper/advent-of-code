@@ -6,15 +6,13 @@ import (
 	"io/ioutil"
 	"log"
 	"sort"
-	//        "strconv"
-	//        "strings"
+	"strconv"
+	"strings"
 )
-
-type operation func(x int) int
 
 type monkey struct {
 	items               []int
-	op                  operation
+	a, b, c             int // Coefficients for polynomial inspection operation.
 	divisor             int
 	destTrue, destFalse int
 	inspections         int
@@ -22,7 +20,8 @@ type monkey struct {
 
 func (m *monkey) inspect(item int) int {
 	m.inspections += 1
-	return m.op(item)
+	// ax^2 + bx + c
+	return (m.a * item * item) + (m.b * item) + m.c
 }
 
 func (m *monkey) test(item int) int {
@@ -37,101 +36,67 @@ func (m *monkey) giveItem(item int) {
 	m.items = append(m.items, item)
 }
 
-func realMonkeys() []monkey {
-	return []monkey{
-		monkey{
-			items:     []int{84, 72, 58, 51},
-			op:        func(x int) int { return x * 3 },
-			divisor:   13,
-			destTrue:  1,
-			destFalse: 7,
-		},
-		monkey{
-			items:     []int{88, 58, 58},
-			op:        func(x int) int { return x + 8 },
-			divisor:   2,
-			destTrue:  7,
-			destFalse: 5,
-		},
-		monkey{
-			items:     []int{93, 82, 71, 77, 83, 53, 71, 89},
-			op:        func(x int) int { return x * x },
-			divisor:   7,
-			destTrue:  3,
-			destFalse: 4,
-		},
-		monkey{
-			items:     []int{81, 68, 65, 81, 73, 77, 96},
-			op:        func(x int) int { return x + 2 },
-			divisor:   17,
-			destTrue:  4,
-			destFalse: 6,
-		},
-		monkey{
-			items:     []int{75, 80, 50, 73, 88},
-			op:        func(x int) int { return x + 3 },
-			divisor:   5,
-			destTrue:  6,
-			destFalse: 0,
-		},
-		monkey{
-			items:     []int{59, 72, 99, 87, 91, 81},
-			op:        func(x int) int { return x * 17 },
-			divisor:   11,
-			destTrue:  2,
-			destFalse: 3,
-		},
-		monkey{
-			items:     []int{86, 69},
-			op:        func(x int) int { return x + 6 },
-			divisor:   3,
-			destTrue:  1,
-			destFalse: 0,
-		},
-		monkey{
-			items:     []int{91},
-			op:        func(x int) int { return x + 1 },
-			divisor:   19,
-			destTrue:  2,
-			destFalse: 5,
-		},
-	}
-}
-
-var exampleMonkeys = []monkey{
-	monkey{
-		items:     []int{79, 98},
-		op:        func(x int) int { return x * 19 },
-		divisor:   23,
-		destTrue:  2,
-		destFalse: 3,
-	},
-	monkey{
-		items:     []int{54, 65, 75, 74},
-		op:        func(x int) int { return x + 6 },
-		divisor:   19,
-		destTrue:  2,
-		destFalse: 0,
-	},
-	monkey{
-		items:     []int{79, 60, 97},
-		op:        func(x int) int { return x * x },
-		divisor:   13,
-		destTrue:  1,
-		destFalse: 3,
-	},
-	monkey{
-		items:     []int{74},
-		op:        func(x int) int { return x + 3 },
-		divisor:   17,
-		destTrue:  0,
-		destFalse: 1,
-	},
-}
-
 func parseMonkey(text string) monkey {
 	m := monkey{}
+
+	lines := strings.Split(text, "\n")
+
+	var err error
+	_, err = fmt.Sscanf(lines[3], "  Test: divisible by %d", &(m.divisor))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = fmt.Sscanf(lines[4], "    If true: throw to monkey %d", &(m.destTrue))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = fmt.Sscanf(lines[5], "    If false: throw to monkey %d", &(m.destFalse))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	itemLine := strings.TrimPrefix(lines[1], "  Starting items: ")
+	items := strings.Split(itemLine, ", ")
+	for _, item := range items {
+		n, err := strconv.Atoi(item)
+		if err != nil {
+			log.Fatal(err)
+		}
+		m.items = append(m.items, n)
+	}
+
+	op := strings.TrimPrefix(lines[2], "  Operation: new = ")
+	parts := strings.Split(op, " ")
+	switch {
+	case op == "old * old":
+		m.a = 1
+	case parts[1] == "*":
+		v, err := strconv.Atoi(parts[2])
+		if err != nil {
+			log.Fatal(err)
+		}
+		m.b = v
+	case parts[1] == "+":
+		v, err := strconv.Atoi(parts[2])
+		if err != nil {
+			log.Fatal(err)
+		}
+		m.b = 1
+		m.c = v
+	default:
+		log.Fatal("Unkown operation.")
+	}
+
 	return m
+}
+
+func parseInput(data []byte) []monkey {
+	groups := strings.Split(strings.TrimSuffix(string(data), "\n"), "\n\n")
+	monkeys := make([]monkey, len(groups))
+	for i, group := range groups {
+		monkeys[i] = parseMonkey(group)
+	}
+	return monkeys
 }
 
 func round(monkeys []monkey, f func(int) int) {
@@ -184,15 +149,16 @@ func part2(monkeys []monkey) int {
 }
 
 func Run(inputFile string) {
-	_, err := ioutil.ReadFile(inputFile)
+	data, err := ioutil.ReadFile(inputFile)
 	if err != nil {
 		log.Fatal(err)
 	}
-	//        monkeys := parseInput(data)
+	monkeys := parseInput(data)
+	monkeys2 := parseInput(data)
 
-	p1 := part1(realMonkeys())
+	p1 := part1(monkeys)
 	fmt.Println("Part 1:", p1)
 
-	p2 := part2(realMonkeys())
+	p2 := part2(monkeys2)
 	fmt.Println("Part 2:", p2)
 }
