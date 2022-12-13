@@ -1,3 +1,3 @@
 module github.com/maze-mapper/advent-of-code
 
-go 1.14
+go 1.19
