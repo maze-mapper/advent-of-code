@@ -19,6 +19,7 @@ import (
 	"github.com/maze-mapper/advent-of-code/2022/13"
 	"github.com/maze-mapper/advent-of-code/2022/14"
 	"github.com/maze-mapper/advent-of-code/2022/15"
+	"github.com/maze-mapper/advent-of-code/2022/16"
 )
 
 func Run(day, inputFile string) {
@@ -54,6 +55,8 @@ func Run(day, inputFile string) {
 		f = day14.Run
 	case "15":
 		f = day15.Run
+	case "16":
+		f = day16.Run
 	default:
 		log.Fatal(day, " is not a valid day")
 	}
