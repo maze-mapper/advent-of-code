@@ -20,19 +20,23 @@ const (
 )
 
 // blueprint contains the resource requirements for each robot type.
-type blueprint [4][3]int
+type blueprint struct {
+	resourceRequirements [4][3]int
+	maxRates [4]int
+}
 
-func (bp blueprint) buildChoices(resources [4]int, robots [4]int) [][4]int {
+func (bp *blueprint) buildChoices(resources [4]int, robots [4]int) [][4]int {
 	buildable := [][4]int{
 		[4]int{}, // Build nothing.
 	}
 	//	maxRates := bp.maxResourceRates()
-	//	fmt.Println(maxRates)
-	for robotIndex, requiredResources := range bp {
+//		fmt.Println(bp.maxRates)
+	for robotIndex, requiredResources := range bp.resourceRequirements {
 		// Don't build a robot of this type if we have reached the maximum rate at which those resources could be used up.
-		//		if maxRates[robotIndex] == robots[robotIndex] {
-		//			continue
-		//		}
+				if bp.maxResourceRates()[robotIndex] == robots[robotIndex] {
+//					fmt.Println("SKIP")
+					continue
+				}
 
 		// Check which robots can be built with the available resources.
 		b := true
@@ -52,16 +56,20 @@ func (bp blueprint) buildChoices(resources [4]int, robots [4]int) [][4]int {
 }
 
 // maxResourceRates returns the maximum cost for each material for any robot.
-func (bp blueprint) maxResourceRates() [4]int {
-	maxRates := [4]int{}
-	for _, requiredResources := range bp {
-		for i, cost := range requiredResources {
-			if cost > maxRates[i] {
-				maxRates[i] = cost
+func (bp *blueprint) maxResourceRates() [4]int {
+	if bp.maxRates == [4]int{} {
+		maxRates := [4]int{}
+		for _, requiredResources := range bp.resourceRequirements {
+			for i, cost := range requiredResources {
+				if cost > maxRates[i] {
+					maxRates[i] = cost
+				}
 			}
 		}
+		maxRates[3] = 50 // hack
+		bp.maxRates = maxRates
 	}
-	return maxRates
+	return bp.maxRates
 }
 
 func parseInput(data []byte) []blueprint {
@@ -78,10 +86,13 @@ func parseInput(data []byte) []blueprint {
 			log.Fatal("Not enough matches found")
 		}
 		bp := blueprint{
+			resourceRequirements: [4][3]int{
 			[3]int{oreRobotOreCost, 0, 0},                          // Ore robot.
 			[3]int{clayRobotOreCost, 0, 0},                         // Clay robot.
 			[3]int{obsidianRobotOreCost, obsidianRobotClayCost, 0}, // Obsidian robot.
 			[3]int{geodeRobotOreCost, 0, geodeRobotObsideanCost},   // Geode robot.
+		},
+		
 		}
 		blueprints[i] = bp
 	}
@@ -170,7 +181,7 @@ func dfs(bp blueprint, robots [4]int, resources [4]int, remainingTurns int, maxG
 
 		// Spend resources to build a new robot.
 		for i, n := range robotsToBuild {
-			for j, cost := range bp[i] {
+			for j, cost := range bp.resourceRequirements[i] {
 				newResources[j] -= cost * n
 			}
 		}
@@ -334,8 +345,8 @@ func Run(inputFile string) {
 	}
 	blueprints := parseInput(data)
 
-	//	p1 := part1(blueprints)
-	//	fmt.Println("Part 1:", p1)
+		p1 := part1(blueprints)
+		fmt.Println("Part 1:", p1)
 
 	p2 := part2(blueprints)
 	fmt.Println("Part 2:", p2)
