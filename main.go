@@ -4,11 +4,12 @@ import (
 	"flag"
 	"log"
 
-	"github.com/maze-mapper/advent-of-code/2015"
-	"github.com/maze-mapper/advent-of-code/2018"
-	"github.com/maze-mapper/advent-of-code/2019"
-	"github.com/maze-mapper/advent-of-code/2021"
-	"github.com/maze-mapper/advent-of-code/2022"
+	aoc2015 "github.com/maze-mapper/advent-of-code/2015"
+	aoc2018 "github.com/maze-mapper/advent-of-code/2018"
+	aoc2019 "github.com/maze-mapper/advent-of-code/2019"
+	aoc2021 "github.com/maze-mapper/advent-of-code/2021"
+	aoc2022 "github.com/maze-mapper/advent-of-code/2022"
+	aoc2023 "github.com/maze-mapper/advent-of-code/2023"
 )
 
 func main() {
@@ -32,6 +33,8 @@ func main() {
 		f = aoc2021.Run
 	case "2022":
 		f = aoc2022.Run
+	case "2023":
+		f = aoc2023.Run
 	default:
 		log.Fatal(year, " is not a valid year")
 	}
