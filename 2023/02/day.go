@@ -73,15 +73,9 @@ func part2(games [][]cubes) int {
 	for _, game := range games {
 		var minCubes cubes
 		for _, draw := range game {
-			if draw.r > minCubes.r {
-				minCubes.r = draw.r
-			}
-			if draw.g > minCubes.g {
-				minCubes.g = draw.g
-			}
-			if draw.b > minCubes.b {
-				minCubes.b = draw.b
-			}
+			minCubes.r = max(minCubes.r, draw.r)
+			minCubes.g = max(minCubes.g, draw.g)
+			minCubes.b = max(minCubes.b, draw.b)
 		}
 		sum += minCubes.power()
 	}
