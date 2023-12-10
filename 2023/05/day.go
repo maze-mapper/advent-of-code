@@ -10,9 +10,37 @@ import (
 	"strings"
 )
 
+// type numRange struct {
+// 	lo, hi int
+// }
+
+// func (r numRange) isEmpty() bool {
+// 	return r.lo == r.hi
+// }
+
+// // Returns overlapping and non-overlapping
+// func splitIntersect(src, dst numRange) (numRange, numRange) {
+// 	// No overlap.
+// 	if src.hi < dst.lo || src.lo > dst.hi {
+// 		return src, numRange{}
+// 	}
+// 	// Fully contained.
+// 	if src.lo >= dst.lo && src.hi <= dst.hi {
+// 		return src, numRange{}
+// 	}
+// 	// Overlaps at bottom.
+// 	if src.hi >= dst.lo {
+// 		return numRange{lo: dst.lo, hi: src.hi}, numRange{lo: src.lo, hi: src.lo - 1}
+// 	}
+// 	// Overlaps at top.
+// 	if src.lo <= dst.hi {
+// 		return numRange{lo: src.lo, hi: dst.hi}, numRange{lo: dst.hi + 1, hi: src.hi}
+// 	}
+// 	return numRange{}, numRange{}
+// }
+
 type almanac struct {
-	seeds []int
-	// mappings []map[int]int
+	seeds    []int
 	mappings [][]mappingFunc
 }
 
@@ -89,7 +117,6 @@ func part2(a almanac) int {
 					}
 				}
 			}
-			// fmt.Println("Seed:", seed, "location:", input)
 			minLocation = min(minLocation, input)
 		}
 	}
