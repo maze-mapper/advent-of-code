@@ -24,7 +24,7 @@ import (
 	day18 "github.com/maze-mapper/advent-of-code/2023/18"
 	day19 "github.com/maze-mapper/advent-of-code/2023/19"
 	day20 "github.com/maze-mapper/advent-of-code/2023/20"
-	// "github.com/maze-mapper/advent-of-code/2023/21"
+	day21 "github.com/maze-mapper/advent-of-code/2023/21"
 	// "github.com/maze-mapper/advent-of-code/2023/22"
 	// "github.com/maze-mapper/advent-of-code/2023/23"
 	// "github.com/maze-mapper/advent-of-code/2023/24"
@@ -74,8 +74,8 @@ func Run(day, inputFile string) {
 		f = day19.Run
 	case "20":
 		f = day20.Run
-	// case "21":
-	// 	f = day21.Run
+	case "21":
+		f = day21.Run
 	// case "22":
 	// 	f = day22.Run
 	// case "23":
